@@ -11,7 +11,7 @@ let matchedCards=[];
 
 //create the cards
 function startgame(){
-	icons=shuffle(icons);
+	//icons=shuffle(icons);
 for(let i=0; i<icons.length; i++){
     const card = document.createElement("li");
     card.classList.add("card");
@@ -36,7 +36,7 @@ for(let i=0; i<icons.length; i++){
       const currentCard = this;
       const previousCard = openedCards[0];
       //we have an existing opened card
-      if(openedCards.length === 1 && previousCard!=currentCard) {
+      if(openedCards.length === 1 ) {
 
         card.classList.add("open","show","disable");
         openedCards.push(this);
@@ -86,7 +86,7 @@ function compare(currentCard,previousCard){
             currentCard.classList.remove("open","show","disable");
        	    previousCard.classList.remove("open","show","disable");
             openedCards=[];
-          },600);
+          },200);
        
 
        	
@@ -98,10 +98,43 @@ function compare(currentCard,previousCard){
 function isOver() {
 	
    if(matchedCards.length === icons.length){
-       alert(`Congratulations.You have won the game by ${moves} moves and ${minute} minute ${second} seconds`);
-       clearInterval(interval);
+       //alert(`Congratulations.You have won the game by ${moves} moves and ${minute} minute ${second} seconds`);
+      const winMessage = document.querySelector(".modal-message");
+      modal.style.display="block";
+
+      const successMovesContainer=document.querySelector(".successMoves");
+      successMovesContainer.innerHTML=moves +1;
+
+      const rankContainer = document.querySelector( ".playerRanking" );
+  rankContainer.innerHTML =   starsContainer.innerHTML;
+
+  // Add time to the Modal
+
+ const totalHours       = document.querySelector("#totalHours");
+
+ const totalMinutes     = document.querySelector("#totalMinutes");
+
+ const totalSeconds     = document.querySelector("#totalSeconds");
+
+    totalHours.innerHTML   = hours;
+
+    totalMinutes.innerHTML = minutes;
+
+    totalSeconds.innerHTML = seconds;
    }
 }
+
+
+const playAgainBtn = document.querySelector( ".play-again" );
+
+playAgainBtn.addEventListener( "click", function() {
+
+  // Start the game again from within the modal
+
+
+  startgame();
+
+} );
 
 
 //To count the number of moves
@@ -146,6 +179,7 @@ restartBtn.addEventListener("click",function(){
     startgame();
 
 	matchedCards=[];
+  openedCards=[];
 	moves=0;
 	movesContainer.innerHTML=moves;
 	starsContainer.innerHTML=`<li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li>`;
@@ -204,6 +238,9 @@ function shuffle(array) {
 
     return array;
 }
+
+
+
 
 
 

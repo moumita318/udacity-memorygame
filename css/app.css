@@ -111,3 +111,31 @@ h1 {
     float: right;
     cursor: pointer;
 }
+
+.modal {
+    display: none;
+    position: absolute;
+    z-index: 99;
+    left: 50;
+    top: 50;
+    width: 40%;
+    height: 50%;
+    overflow: auto;
+    background: #fff;
+    opacity: 1;
+}
+
+.modal-message {
+  top:  -20%;
+    text-align: center;
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 10px;
+}
+
+.win-message {
+  top: -63%;
+  margin: 10%;
+    font-size: 20px;
+    letter-spacing: 2px;
+}
