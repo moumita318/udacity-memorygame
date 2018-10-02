@@ -98,15 +98,17 @@ function compare(currentCard,previousCard){
 function isOver() {
 	
    if(matchedCards.length === icons.length){
+
+       var modal=document.getElementById("myModal");
        //alert(`Congratulations.You have won the game by ${moves} moves and ${minute} minute ${second} seconds`);
       const winMessage = document.querySelector(".modal-message");
       modal.style.display="block";
 
       const successMovesContainer=document.querySelector(".successMoves");
-      successMovesContainer.innerHTML=moves +1;
+      successMovesContainer.innerHTML=moves + 1;
 
       const rankContainer = document.querySelector( ".playerRanking" );
-  rankContainer.innerHTML =   starsContainer.innerHTML;
+      rankContainer.innerHTML =   starsContainer.innerHTML;
 
   // Add time to the Modal
 
@@ -116,12 +118,20 @@ function isOver() {
 
  const totalSeconds     = document.querySelector("#totalSeconds");
 
-    totalHours.innerHTML   = hours;
+    totalHours.innerHTML   = hour;
 
-    totalMinutes.innerHTML = minutes;
+    totalMinutes.innerHTML = minute;
 
-    totalSeconds.innerHTML = seconds;
+    totalSeconds.innerHTML = second;
+
+
+
+
+    var timer=document.querySelector(".timer");
+    timer.innerHTML=`0 mins 0 secs`;
+    clearInterval(interval);
    }
+
 }
 
 
@@ -130,11 +140,35 @@ const playAgainBtn = document.querySelector( ".play-again" );
 playAgainBtn.addEventListener( "click", function() {
 
   // Start the game again from within the modal
+cardsContainer.innerHTML="";
+    startgame();
 
+  matchedCards=[];
+  openedCards=[];
+  moves=0;
+  movesContainer.innerHTML=moves;
+  starsContainer.innerHTML=`<li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li>`;
 
-  startgame();
+  //reset timer
+  var timer=document.querySelector(".timer");
+  timer.innerHTML=`0 mins 0 secs`;
+  clearInterval(interval);
+
+var modal = document.getElementById('myModal');
+modal.style.display = "none";
 
 } );
+
+
+const closeBtn =document.querySelector(".close");
+closeBtn.addEventListener("click",function(){
+  var modal = document.getElementById('myModal');
+modal.style.display = "none";
+
+});
+
+
+
 
 
 //To count the number of moves
@@ -189,6 +223,8 @@ restartBtn.addEventListener("click",function(){
 	timer.innerHTML=`0 mins 0 secs`;
 	clearInterval(interval);
 
+var modal = document.getElementById('myModal');
+modal.style.display = "none";
 });
 
 
